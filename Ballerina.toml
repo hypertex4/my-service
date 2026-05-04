@@ -1,0 +1,18 @@
+[package]
+org = "lenovo"
+name = "my_service"
+version = "0.1.0"
+distribution = "2201.13.3"
+
+[build-options]
+observabilityIncluded = true
+
+[[dependency]]
+org = "ballerinax"
+name = "mysql"
+version = "1.13.1"
+
+[[dependency]]
+org = "ballerinax"
+name = "mysql.driver"
+version = "1.8.1"
