@@ -4,7 +4,7 @@ import ballerina/time;
 import ballerinax/mysql;
 import ballerinax/mysql.driver as _;
 
-// ── DB config (read from Config.toml) ────────────────────────
+// ── DB config (read from Config.toml) ──
 type DbConfig record {|
     string host;
     int port;
@@ -15,7 +15,7 @@ type DbConfig record {|
 
 configurable DbConfig dbConfig = ?;
 
-// ── DB client (singleton) ─────────────────────────────────────
+// ── DB client (singleton) ──
 final mysql:Client dbClient = check new (
     host     = dbConfig.host,
     port     = dbConfig.port,
@@ -24,7 +24,7 @@ final mysql:Client dbClient = check new (
     database = dbConfig.database
 );
 
-// ── Response types ────────────────────────────────────────────
+// ── Response types ──
 
 type AccountStatus "ACTIVE"|"INACTIVE"|"FROZEN";
 type AccountType   "SAVINGS"|"CURRENT"|"FIXED";
@@ -70,7 +70,7 @@ type ErrorResponse record {|
     string message;
 |};
 
-// ── Request types ─────────────────────────────────────────────
+// ── Request types ──
 
 type BalanceRequest record {|
     string accountNumber;
@@ -87,7 +87,7 @@ type StatementRequest record {|
     string? toDate     = ();
 |};
 
-// ── Helper: fetch account row ─────────────────────────────────
+// ── Helper: fetch account row ──
 function getAccount(string accountNumber) returns record {|
     string account_number;
     string account_name;
@@ -102,10 +102,10 @@ function getAccount(string accountNumber) returns record {|
     );
 }
 
-// ── Service ───────────────────────────────────────────────────
+// ── Service ───
 service /api on new http:Listener(8080) {
 
-    // ── 1. Balance Enquiry ─────────────────────────────────────
+    // ── 1. Balance Enquiry ───
     // POST /api/accounts/balance
     resource function post accounts/balance(@http:Payload BalanceRequest req)
             returns BalanceResponse|http:NotFound|http:Forbidden|http:InternalServerError {
