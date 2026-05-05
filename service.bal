@@ -105,8 +105,7 @@ function getAccount(string accountNumber) returns record {|
 // ── Service ───
 service /api on new http:Listener(8080) {
 
-    // ── 1. Balance Enquiry ───
-    // POST /api/accounts/balance
+    // 1. POST /api/accounts/balance
     resource function post accounts/balance(@http:Payload BalanceRequest req)
             returns BalanceResponse|http:NotFound|http:Forbidden|http:InternalServerError {
 
@@ -139,8 +138,7 @@ service /api on new http:Listener(8080) {
         };
     }
 
-    // ── 2. Name Enquiry ────────────────────────────────────────
-    // POST /api/accounts/name
+    // 2. POST /api/accounts/name
     resource function post accounts/name(@http:Payload NameEnquiryRequest req)
             returns NameEnquiryResponse|http:NotFound|http:InternalServerError {
 
@@ -164,8 +162,7 @@ service /api on new http:Listener(8080) {
         };
     }
 
-    // ── 3. Statement of Account ────────────────────────────────
-    // POST /api/accounts/statement
+    // 3. POST /api/accounts/statement
     resource function post accounts/statement(@http:Payload StatementRequest req)
             returns StatementResponse|http:NotFound|http:BadRequest|http:InternalServerError {
 
